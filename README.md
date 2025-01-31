@@ -1,1 +1,1 @@
-# ssh-manage
+# ssh-manager
