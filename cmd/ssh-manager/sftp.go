@@ -35,12 +35,14 @@ var connectSftpCmd = &cobra.Command{
 			if err != nil {
 				log.Fatal(err)
 			}
-			sshKeyArg = fmt.Sprintf("-i %s", strings.TrimSpace(string(keyOutput)))
+			sshKeyArg = strings.TrimSpace(string(keyOutput))
 		} else {
-			sshKeyArg = fmt.Sprintf("-i %s", conn.SSHKey)
+			sshKeyArg = strings.TrimSpace(conn.SSHKey)
 		}
 
-		sftpArgs := []string{sshKeyArg, fmt.Sprintf("%s@%s", conn.User, conn.Address)}
+		sftpArgs := []string{"-i", sshKeyArg}
+		sftpArgs = append(sftpArgs, fmt.Sprintf("%s@%s", conn.User, conn.Address))
+
 		sftpCmd := exec.Command("sftp", sftpArgs...)
 		sftpCmd.Stdin = os.Stdin
 		sftpCmd.Stdout = os.Stdout
