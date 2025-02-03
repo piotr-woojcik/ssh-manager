@@ -36,8 +36,7 @@ var connectCmd = &cobra.Command{
 
 		var portArgs []string
 		for _, pm := range mappings {
-			portArgs = append(portArgs, fmt.Sprintf("-L %d:localhost:%d",
-				pm.LocalPort, pm.RemotePort))
+			portArgs = append(portArgs, fmt.Sprintf("-L %d:localhost:%d", pm.LocalPort, pm.RemotePort))
 		}
 
 		var sshKeyArg string
@@ -46,12 +45,12 @@ var connectCmd = &cobra.Command{
 			if err != nil {
 				log.Fatal(err)
 			}
-			sshKeyArg = fmt.Sprintf("-i %s", strings.TrimSpace(string(keyOutput)))
+			sshKeyArg = strings.TrimSpace(string(keyOutput))
 		} else {
-			sshKeyArg = fmt.Sprintf("-i %s", conn.SSHKey)
+			sshKeyArg = strings.TrimSpace(conn.SSHKey)
 		}
 
-		sshArgs := []string{sshKeyArg}
+		sshArgs := []string{"-i", sshKeyArg}
 		sshArgs = append(sshArgs, portArgs...)
 		sshArgs = append(sshArgs, fmt.Sprintf("%s@%s", conn.User, conn.Address))
 
