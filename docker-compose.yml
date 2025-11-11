@@ -1,0 +1,34 @@
+services:
+  ssh-test-server:
+    image: lscr.io/linuxserver/openssh-server:latest
+    container_name: ssh-test-server
+    hostname: ssh-test
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - PASSWORD_ACCESS=true
+      - USER_PASSWORD=testpass
+      - USER_NAME=testuser
+    ports:
+      - "2222:2222"
+    volumes:
+      - ./test-data/test-ssh-data:/config
+    restart: unless-stopped
+
+  ssh-test-server-alt:
+    image: lscr.io/linuxserver/openssh-server:latest
+    container_name: ssh-test-server-alt
+    hostname: ssh-test-alt
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - PASSWORD_ACCESS=true
+      - USER_PASSWORD=testpass2
+      - USER_NAME=altuser
+    ports:
+      - "2223:2222"
+    volumes:
+      - ./test-data/test-ssh-data-alt:/config
+    restart: unless-stopped
