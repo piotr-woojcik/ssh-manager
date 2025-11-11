@@ -37,18 +37,6 @@ ssh-manager completion-zsh
 ssh-manager completion-bash
 ```
 
-#### For example I'm using [oh-my-zsh](https://ohmyz.sh/) so I have to:
-
-Add this line to ~/.zshrc:
-```bash
-autoload -U compinit; compinit
-```
-
-Generate completion script:
-```bash
-ssh-manager completion-zsh > "${fpath[1]}/_ssh-manager"
-```
-
 ## Usage
 
 ### Adding a Connection
